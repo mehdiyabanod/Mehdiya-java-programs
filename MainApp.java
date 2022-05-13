@@ -1,44 +1,36 @@
 package p1;
 
-import java.util.Scanner;
+class OuterClass {
+	int i;
 
-class parent{
-	private int sal;
-	public String name;
-	protected int age;
-	int accno;
-	void input() {
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter salary");
-		sal=sc.nextInt();
-		System.out.println("Enter name");
-		name=sc.next();
-		System.out.println("Enter age");
-		age=sc.nextInt();
-		System.out.println("Enter accno");
-		accno=sc.nextInt();
-		System.out.println("age="+age);
+	private class InnerClass {
+		int varinner;
+
+		InnerClass() {
+			varinner = 10;
+
+		}
+
+		void method_inner() {
+			System.out.println("InnerClass Method=" + varinner);
+			System.out.println("outer class variable i=" + i);
+		}
+
+	}// Inner class end
+
+	void outer_method() {
+		InnerClass ob = new InnerClass();
+		ob.method_inner();// call inner class method
+
 	}
-void printsal() {
-	System.out.println("salary="+sal);
+
 }
-}
-class Child extends parent{
-	void display() {
-		
-		System.out.println("name="+name);
-		System.out.println("age="+age);
-		System.out.println("accno="+accno);
-		
-	}
-}
+
 public class MainApp {
 
 	public static void main(String[] args) {
-		Child ob=new Child();
-		ob.input();
-		ob.display();
-		ob.printsal();
+OuterClass ob=new OuterClass();
+ob.outer_method();
 	}
 
 }
