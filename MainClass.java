@@ -1,33 +1,32 @@
-package p2;
+package p1;
 
-import p2.DemoStatic;
+import java.util.Scanner;
 
-class DemoStatic {
-	static int i;
-	int j;
-
-	static {
-		System.out.println("static block it is called");
-		i = 1;
-	}
-
-	DemoStatic() {
-		System.out.println("Constructor");
+//user defined Exception
+class CheckAge extends Exception {
+	public CheckAge(String s) {
+		super(s);// call constructor
 	}
 }
 
 public class MainClass {
-	static {
-		System.out.println("static 1 before main");
-	}
-	static {
-		System.out.println("static 2 before main");
-	}
 
 	public static void main(String[] args) {
-		System.out.println("Main");
-		DemoStatic ob = new DemoStatic();
-
+		int age;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter age");
+		age=sc.nextInt();
+		try {
+			if(age<18) {
+				throw new CheckAge("Not Eligible for voting");
+				}
+			else {
+				System.out.println("You can vote");
+			}
+		}catch(CheckAge e) {
+			System.out.println("object"+e);//object printing
+			e.printStackTrace();
+		}
 	}
 
 }
