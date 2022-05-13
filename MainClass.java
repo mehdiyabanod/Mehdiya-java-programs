@@ -1,29 +1,35 @@
-//single inheritance
-package p1;
-class A{//parent class or superclass
-	int i;//instance variable
-	A(){//constructor
-		i=10;
-		System.out.println("i=+i");
-		
+package p2.parent;
+
+class parent {
+	private int sal;
+
+	public parent() {
+		System.out.println("parent class constructor");
+	}
+
+	public parent(int sal) {
+		this.sal = sal;
+		System.out.println("salary=" + sal);
 	}
 }
-class B extends A{//B is child class or subclass
-	int j;
-	B(){//constructor
-		j=23;
-		
+
+class Child extends parent {
+	public Child() {
+		System.out.println("Child class costructor");
 	}
-	void add() {
-		int s=i+j;
-		System.out.println("sum="+s);
+
+	public Child(int sal) {
+		super(sal);
+		System.out.println("Other statements");
 	}
 }
+
 public class MainClass {
-public static void main(String[] args) {
-	B ob=new B();
-	ob.add();
-	
+
+	public static void main(String[] args) {
+		parent ob=new parent();
+Child ob1=new Child();
+Child ob2=new Child(456);
 
 	}
 
