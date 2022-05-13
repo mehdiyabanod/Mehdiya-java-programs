@@ -1,41 +1,49 @@
 package p1;
 
-import java.util.Scanner;
+class Bank {
+	static int amount = 10000;
 
-class BankException extends Exception {
-	public BankException(String s) {
-		super(s);
-	}
-}
+	synchronized void deposit(int damt) {
+		System.out.println("Deposit method");
+		amount = amount + damt;
+		System.out.println("amount after deposit=" + amount);
+		System.out.println("deposit is completed");
+		notify();
 
-class SBIBank {
-	int bankbalance;
-
-	public SBIBank() {
-		bankbalance = 20000;
 	}
 
-	void withDraw(int withdrawamt) {
-		try {
-			if (withdrawamt > bankbalance) {
-				throw new BankException("Insufficent balance");
-			} else {
-				bankbalance = bankbalance - withdrawamt;
-			}
-		} catch (BankException e) {
-			e.printStackTrace();
+	synchronized void withdraw(int wamt) throws InterruptedException {
+		System.out.println("Withdraw method");
+		if (wamt < amount) {
+			wait();
+
 		}
+		amount = amount + wamt;
+		System.out.println("amount after witdraw=" + amount);
+
 	}
 }
 
 public class MainBank {
 
 	public static void main(String[] args) {
-SBIBank sob=new SBIBank();
-Scanner sc=new Scanner(System.in);
-System.out.println("Enter amount to withdraw");
-int amt=sc.nextInt();
-sob.withDraw(amt);
-	}
+		Bank ob = new Bank();
+		new Thread() {
+			public void run() {
+				try {
+					ob.withdraw(30000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 
+		}.start();
+
+		new Thread() {
+			public void run() {
+				ob.deposit(20000);
+			}
+		}.start();
+
+	}
 }
