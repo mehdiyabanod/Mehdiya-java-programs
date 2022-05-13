@@ -1,33 +1,33 @@
-//static can apply to [variable] ,method and inner class  
-package p1;
+package p2;
+
+import p2.DemoStatic;
 
 class DemoStatic {
 	static int i;
 	int j;
 
-	DemoStatic() {
+	static {
+		System.out.println("static block it is called");
 		i = 1;
-		j = 1;
-		System.out.println("static initial value of i=" + i);
-		System.out.println("non static initial value of j=" + j);
 	}
 
-	void display() {
-		i = i + 1;
-		j = j + 1;
-		System.out.println("static i=" + i);
-		System.out.println("non static j=" + j);
+	DemoStatic() {
+		System.out.println("Constructor");
 	}
 }
 
 public class MainClass {
+	static {
+		System.out.println("static 1 before main");
+	}
+	static {
+		System.out.println("static 2 before main");
+	}
 
 	public static void main(String[] args) {
-System.out.println("Mian");
-DemoStatic ob=new DemoStatic();
-DemoStatic ob1=new DemoStatic();
-ob.display();
-ob1.display();
+		System.out.println("Main");
+		DemoStatic ob = new DemoStatic();
+
 	}
 
 }
