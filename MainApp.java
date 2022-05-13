@@ -1,27 +1,44 @@
-package p2;
+package p1;
 
-class AddOverload {
-	void add(int i, int j) {
-		int s;
-		s = i + j;
-		System.out.println("The sum of " + i + "and" + j + "is+s");
+import java.util.Scanner;
+
+class parent{
+	private int sal;
+	public String name;
+	protected int age;
+	int accno;
+	void input() {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter salary");
+		sal=sc.nextInt();
+		System.out.println("Enter name");
+		name=sc.next();
+		System.out.println("Enter age");
+		age=sc.nextInt();
+		System.out.println("Enter accno");
+		accno=sc.nextInt();
+		System.out.println("age="+age);
 	}
-
-	void add(float i, float j) {
-	}
-
-	void add(double i, double j) {
+void printsal() {
+	System.out.println("salary="+sal);
+}
+}
+class Child extends parent{
+	void display() {
+		
+		System.out.println("name="+name);
+		System.out.println("age="+age);
+		System.out.println("accno="+accno);
+		
 	}
 }
-
 public class MainApp {
 
 	public static void main(String[] args) {
-AddOverload ob=new AddOverload();
-//call all methods by passing values
-ob.add(9, 10);
-ob.add(7, 8.9);
-ob.add(5.7f, 6.5f);
+		Child ob=new Child();
+		ob.input();
+		ob.display();
+		ob.printsal();
 	}
 
 }
